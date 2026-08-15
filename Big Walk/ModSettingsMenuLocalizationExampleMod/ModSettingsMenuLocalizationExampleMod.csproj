@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>ModSettingsMenuLocalizationExampleMod</AssemblyName>
+    <RootNamespace>ModSettingsMenuLocalizationExampleMod</RootNamespace>
+    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CodePage>65001</CodePage>
+
+    <GamePath Condition="'$(GamePath)' == ''">I:\SteamLibrary\steamapps\common\Big Walk</GamePath>
+    <GameBepInExPath Condition="'$(GameBepInExPath)' == ''">$(GamePath)\BepInEx</GameBepInExPath>
+    <GameInteropPath Condition="'$(GameInteropPath)' == ''">$(GameBepInExPath)\interop</GameInteropPath>
+    <GamePluginsPath Condition="'$(GamePluginsPath)' == ''">$(GameBepInExPath)\plugins</GamePluginsPath>
+    <PluginInstallPath>$(GamePluginsPath)\$(AssemblyName)</PluginInstallPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx.Core">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx.Unity.IL2CPP">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameInteropPath)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(GameInteropPath)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BigWalkLocalizationAPI">
+      <HintPath>..\BigWalkLocalizationAPI\bin\$(Configuration)\BigWalkLocalizationAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="ModSettingsMenu">
+      <HintPath>..\ModSettingsMenu\bin\$(Configuration)\ModSettingsMenu.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Localization\Localization.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Localization.json</TargetPath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopyToGamePlugins" AfterTargets="Build">
+    <ItemGroup>
+      <DeployFiles Include="$(TargetPath)" />
+      <DeployFiles Include="$(TargetDir)Localization.json" />
+    </ItemGroup>
+    <MakeDir Directories="$(PluginInstallPath)" Condition="Exists('$(GamePluginsPath)')" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(PluginInstallPath)" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)')" />
+  </Target>
+</Project>
