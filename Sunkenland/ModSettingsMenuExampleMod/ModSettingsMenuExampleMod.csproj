@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>ModSettingsMenuExampleMod</AssemblyName>
+    <RootNamespace>ModSettingsMenuExampleMod</RootNamespace>
+    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <GamePath Condition="'$(GamePath)' == ''">F:\SteamLibrary\steamapps\common\Sunkenland</GamePath>
+    <GameBepInExPath Condition="'$(GameBepInExPath)' == ''">$(GamePath)\BepInEx</GameBepInExPath>
+    <GamePluginsPath Condition="'$(GamePluginsPath)' == ''">$(GameBepInExPath)\plugins</GamePluginsPath>
+    <PluginInstallPath>$(GamePluginsPath)\$(AssemblyName)\</PluginInstallPath>
+    <DeployAfterBuild Condition="'$(DeployAfterBuild)' == ''">true</DeployAfterBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModSettingsMenu\ModSettingsMenu.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+    <Reference Include="BepInEx">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GamePath)\Sunkenland_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GamePath)\Sunkenland_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CopyToGamePlugins" AfterTargets="Build" Condition="'$(DeployAfterBuild)' == 'true'">
+    <MakeDir Directories="$(PluginInstallPath)" Condition="Exists('$(GamePluginsPath)')" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PluginInstallPath)" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)')" />
+  </Target>
+</Project>
