@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>YourMod</AssemblyName>
+    <RootNamespace>YourMod</RootNamespace>
+    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <!-- Override the local game folder with /p:GamePath=... when needed. -->
+    <GamePath Condition="'$(GamePath)' == ''">E:\Steam\steamapps\common\How to Fish\How to Fish</GamePath>
+    <GameBepInExPath Condition="'$(GameBepInExPath)' == ''">$(GamePath)\BepInEx</GameBepInExPath>
+    <GamePluginsPath Condition="'$(GamePluginsPath)' == ''">$(GameBepInExPath)\plugins</GamePluginsPath>
+    <PluginInstallPath>$(GamePluginsPath)\$(AssemblyName)</PluginInstallPath>
+    <ModPath>$(MSBuildProjectDirectory)</ModPath>
+    <DeployAfterBuild Condition="'$(DeployAfterBuild)' == ''">true</DeployAfterBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="HowtoFishLocalizationAPI">
+      <!-- Install the API in the game plugins folder; this example does not reference its source project. -->
+      <HintPath>$(GamePluginsPath)\HowtoFishLocalizationAPI\HowtoFishLocalizationAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GamePath)\How to Fish_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GamePath)\How to Fish_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(GamePath)\How to Fish_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CopyToGamePlugins" AfterTargets="Build" Condition="'$(DeployAfterBuild)' == 'true'">
+    <ItemGroup>
+      <DeployFiles Include="$(TargetPath)" />
+      <DeployFiles Include="$(ModPath)\Localization\YourMod.Localization.json" />
+    </ItemGroup>
+    <MakeDir Directories="$(PluginInstallPath)" Condition="Exists('$(GamePluginsPath)')" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(PluginInstallPath)" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)')" />
+  </Target>
+</Project>

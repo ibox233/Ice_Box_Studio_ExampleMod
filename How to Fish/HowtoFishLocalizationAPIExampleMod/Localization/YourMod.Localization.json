@@ -1,0 +1,42 @@
+{
+  "en": {
+    "config.enabled": "Show the YourMod example window.",
+    "config.message": "Text shown in the YourMod example window.",
+    "modmenu.config.General.Enabled": "General / Show Example Window",
+    "modmenu.config.Display.Message": "Display / Example Message",
+    "window.title": "YourMod Localization Example",
+    "window.body": "{0}",
+    "window.language": "Current language: {0}",
+    "window.config_hint": "Change General / Enabled or Display / Message in the mod configuration."
+  },
+  "zh-CN": {
+    "config.enabled": "显示 YourMod 示例窗口。",
+    "config.message": "YourMod 示例窗口中显示的文本。",
+    "modmenu.config.General.Enabled": "常规 / 显示示例窗口",
+    "modmenu.config.Display.Message": "显示 / 示例消息",
+    "window.title": "YourMod 本地化示例",
+    "window.body": "{0}",
+    "window.language": "当前语言：{0}",
+    "window.config_hint": "在模组配置中修改“常规 / 启用”或“显示 / 示例消息”。"
+  },
+  "zh-TW": {
+    "config.enabled": "顯示 YourMod 範例視窗。",
+    "config.message": "YourMod 範例視窗中顯示的文字。",
+    "modmenu.config.General.Enabled": "一般 / 顯示範例視窗",
+    "modmenu.config.Display.Message": "顯示 / 範例訊息",
+    "window.title": "YourMod 在地化範例",
+    "window.body": "{0}",
+    "window.language": "目前語言：{0}",
+    "window.config_hint": "在模組設定中修改「一般 / 啟用」或「顯示 / 範例訊息」。"
+  },
+  "ja": {
+    "config.enabled": "YourMod のサンプルウィンドウを表示します。",
+    "config.message": "YourMod のサンプルウィンドウに表示するテキストです。",
+    "modmenu.config.General.Enabled": "一般 / サンプルウィンドウを表示",
+    "modmenu.config.Display.Message": "表示 / サンプルメッセージ",
+    "window.title": "YourMod ローカライズ サンプル",
+    "window.body": "{0}",
+    "window.language": "現在の言語: {0}",
+    "window.config_hint": "Mod 設定で「一般 / 有効」または「表示 / サンプルメッセージ」を変更できます。"
+  }
+}
