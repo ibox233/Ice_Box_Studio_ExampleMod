@@ -2,7 +2,7 @@
 
 Small UE4SS Lua mod that demonstrates how another mod can register settings with `R5ModSettings`.
 
-The mod follows the same pattern as `SN2DrainRates` for SN2:
+The mod demonstrates the registration and runtime configuration pattern:
 
 - writes its own manifest to `R5ModSettings\registrations`
 - optionally ensures `R5ModSettings\saved\R5ModSettingsExample.lua` exists with defaults so gameplay code can read config before the player opens Settings > Mods
