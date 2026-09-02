@@ -25,9 +25,3 @@ Saved values are stored at:
 ```text
 ue4ss\Mods\R5ModSettings\saved\R5ModSettingsExample.lua
 ```
-
-Install with:
-
-```powershell
-.\Mods\R5ModSettingsExample\Install.ps1 -GameWin64Dir "F:\SteamLibrary\steamapps\common\Windrose\R5\Binaries\Win64"
-```
