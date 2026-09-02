@@ -18,6 +18,7 @@ It adds one mod block named `R5 Mod Settings Example - 0.1.0` with:
 - Slider setting
 - Dropdown setting
 - Keybind setting saved as primary/secondary Unreal key name strings, for example `F8` and `None`
+- Optional `order` values that control the display order of settings
 
 Saved values are stored at:
 
