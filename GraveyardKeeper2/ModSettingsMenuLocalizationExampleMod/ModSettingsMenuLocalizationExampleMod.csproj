@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>ModSettingsMenuLocalizationExampleMod</AssemblyName>
+    <RootNamespace>ModSettingsMenuLocalizationExampleMod</RootNamespace>
+    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <GamePath Condition="'$(GamePath)' == ''">G:\SteamLibrary\steamapps\common\Graveyard Keeper 2</GamePath>
+    <GameBepInExPath Condition="'$(GameBepInExPath)' == ''">$(GamePath)\BepInEx</GameBepInExPath>
+    <GamePluginsPath Condition="'$(GamePluginsPath)' == ''">$(GameBepInExPath)\plugins</GamePluginsPath>
+    <PluginInstallPath>$(GamePluginsPath)\$(AssemblyName)</PluginInstallPath>
+    <ModPath>$(MSBuildProjectDirectory)</ModPath>
+    <DeployAfterBuild Condition="'$(DeployAfterBuild)' == ''">true</DeployAfterBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="GraveyardKeeper2LocalizationAPI">
+      <HintPath>$(GamePluginsPath)\GraveyardKeeper2LocalizationAPI\GraveyardKeeper2LocalizationAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="ModSettingsMenu">
+      <HintPath>$(GamePluginsPath)\ModSettingsMenu\ModSettingsMenu.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GamePath)\GraveyardKeeper2_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GamePath)\GraveyardKeeper2_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <None Update="Localization\$(AssemblyName).Localization.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>$(AssemblyName).Localization.json</TargetPath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopyToGamePlugins" AfterTargets="Build" Condition="'$(DeployAfterBuild)' == 'true'">
+    <ItemGroup>
+      <DeployFiles Include="$(TargetPath)" />
+      <DeployFiles Include="$(ModPath)\Localization\$(AssemblyName).Localization.json" />
+    </ItemGroup>
+    <MakeDir Directories="$(PluginInstallPath)" Condition="Exists('$(GamePluginsPath)')" />
+    <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(PluginInstallPath)" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)')" />
+  </Target>
+</Project>
