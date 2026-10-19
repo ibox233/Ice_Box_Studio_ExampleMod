@@ -1,0 +1,66 @@
+{
+  "en": {
+    "mod.name": "Localization API Example",
+    "mod.description": "Demonstrates single JSON localization, embedded C# strings, scoped keys, formatting, and language-change callbacks.",
+    "log.loaded": "{0} loaded with JSON localization.",
+    "log.language_changed": "Language changed to {0}.",
+    "window.title": "Example Window",
+    "window.body": "This text uses the bound localizer, so the code does not pass the plugin GUID every time."
+  },
+  "zh_CN": {
+    "mod.name": "本地化 API 示例",
+    "mod.description": "演示单 JSON 本地化、C# 内嵌文本、key 隔离、格式化和语言切换回调。",
+    "log.loaded": "{0} 已通过 JSON 本地化加载。",
+    "log.language_changed": "语言已切换为 {0}。",
+    "window.title": "示例窗口",
+    "window.body": "这段文本使用绑定后的 localizer，因此代码不需要每次传入插件 GUID。"
+  },
+  "zh_TW": {
+    "mod.name": "在地化 API 範例",
+    "mod.description": "示範單 JSON 在地化、C# 內嵌文字、key 隔離、格式化與語言切換回呼。",
+    "log.loaded": "{0} 已透過 JSON 在地化載入。",
+    "log.language_changed": "語言已切換為 {0}。",
+    "window.title": "範例視窗",
+    "window.body": "這段文字使用綁定後的 localizer，因此程式碼不需要每次傳入外掛 GUID。"
+  },
+  "ja_JP": {
+    "mod.name": "Localization API Example",
+    "mod.description": "単一 JSON、C# 埋め込み文字列、スコープ付きキー、書式設定、言語変更コールバックの例です。",
+    "log.loaded": "{0} loaded with JSON localization.",
+    "log.language_changed": "Language changed to {0}.",
+    "window.title": "Example Window",
+    "window.body": "This text uses the bound localizer, so the code does not pass the plugin GUID every time."
+  },
+  "pt_BR": {
+    "mod.name": "Exemplo da API de Localizacao",
+    "mod.description": "Demonstra localizacao em JSON unico, textos C# embutidos, chaves com escopo, formatacao e callbacks de troca de idioma.",
+    "log.loaded": "{0} carregado com localizacao JSON.",
+    "log.language_changed": "Idioma alterado para {0}.",
+    "window.title": "Janela de exemplo",
+    "window.body": "Este texto usa o localizador vinculado, entao o codigo nao passa o GUID do plugin toda vez."
+  },
+  "pt_PT": {
+    "mod.name": "Exemplo da API de Localizacao",
+    "mod.description": "Demonstra localizacao num unico JSON, textos C# incorporados, chaves com ambito, formatacao e callbacks de alteracao de idioma.",
+    "log.loaded": "{0} carregado com localizacao JSON.",
+    "log.language_changed": "Idioma alterado para {0}.",
+    "window.title": "Janela de exemplo",
+    "window.body": "Este texto usa o localizador associado, por isso o codigo nao passa sempre o GUID do plugin."
+  },
+  "th_TH": {
+    "mod.name": "Localization API Example",
+    "mod.description": "Demonstrates single JSON localization, embedded C# strings, scoped keys, formatting, and language-change callbacks.",
+    "log.loaded": "{0} loaded with JSON localization.",
+    "log.language_changed": "Language changed to {0}.",
+    "window.title": "Example Window",
+    "window.body": "This text uses the bound localizer, so the code does not pass the plugin GUID every time."
+  },
+  "uk_UA": {
+    "mod.name": "Localization API Example",
+    "mod.description": "Demonstrates single JSON localization, embedded C# strings, scoped keys, formatting, and language-change callbacks.",
+    "log.loaded": "{0} loaded with JSON localization.",
+    "log.language_changed": "Language changed to {0}.",
+    "window.title": "Example Window",
+    "window.body": "This text uses the bound localizer, so the code does not pass the plugin GUID every time."
+  }
+}

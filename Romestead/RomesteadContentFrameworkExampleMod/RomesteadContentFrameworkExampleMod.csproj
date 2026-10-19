@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>RomesteadContentFrameworkExampleMod</AssemblyName>
+    <RootNamespace>RomesteadContentFrameworkExampleMod</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <NoWarn>$(NoWarn);CA2252;CA1416</NoWarn>
+
+    <GamePath Condition="'$(GamePath)' == ''">F:\SteamLibrary\steamapps\common\romestead</GamePath>
+    <GameBepInExPath Condition="'$(GameBepInExPath)' == ''">$(GamePath)\BepInEx</GameBepInExPath>
+    <GamePluginsPath Condition="'$(GamePluginsPath)' == ''">$(GameBepInExPath)\plugins</GamePluginsPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Build the matching framework configuration instead of referencing a stale
+         DLL from bin/Debug. The framework remains a separately installed dependency. -->
+    <ProjectReference Include="..\RomesteadContentFramework\RomesteadContentFramework.csproj" Private="false" />
+    <Reference Include="BepInEx.Core">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx.NET.Common">
+      <HintPath>$(GameBepInExPath)\core\BepInEx.NET.Common.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Shared">
+      <HintPath>$(GamePath)\Shared.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(GamePath)\MonoGame.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- List standalone images explicitly so future concept art is not deployed.
+         Map resources keep their relative Content layout for CMX/CDB/TSX references. -->
+    <ModAssets Include="Assets\CustomVfxItem\lumen_catalyst.png;Assets\CustomVfxItem\lumen_burst_vfx.png;Assets\BuiltinEffectItem\verdant_tonic.png;Assets\TeleportItem\wayhome_coin.png;Assets\HunterLodge\hunter_lodge_full_game.png" />
+    <ModAssets Include="Assets\HunterLodge\Content\**\*.cdb;Assets\HunterLodge\Content\**\*.cdx;Assets\HunterLodge\Content\**\*.cmx;Assets\HunterLodge\Content\**\*.tmx;Assets\HunterLodge\Content\**\*.tsx;Assets\HunterLodge\Content\**\*.png" />
+  </ItemGroup>
+
+  <Target Name="CopyToGamePlugins" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePluginsPath)" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)')" />
+    <!-- Identity already starts with Assets\; preserve it rather than flattening
+         images and map databases into a single directory. -->
+    <Copy SourceFiles="@(ModAssets)" DestinationFiles="@(ModAssets->'$(GamePluginsPath)\RomesteadContentFrameworkExampleMod\%(Identity)')" SkipUnchangedFiles="true" Condition="Exists('$(GamePluginsPath)') and '@(ModAssets)' != ''" />
+  </Target>
+</Project>
